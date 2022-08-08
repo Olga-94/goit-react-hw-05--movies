@@ -1,5 +1,5 @@
 import { useEffect, useState, lazy, Suspense } from 'react';
-import { useParams, useNavigate, Route, Routes } from 'react-router-dom';
+import { useParams, useNavigate, useLocation, Route, Routes } from 'react-router-dom';
 import toast from 'react-hot-toast';
 import { fetchMovieInformation } from '../services/apiService';
 import { Button } from '../components/App.styled';
@@ -14,7 +14,7 @@ const ReviewsView = lazy(() =>
 );
 
 const MovieDetailsPage = () => {
-  // const location = useLocation();
+  const location = useLocation();
   const navigate = useNavigate();
   // const goBack = location.state?.from ?? '/';
   const { movieId } = useParams();
@@ -40,7 +40,8 @@ const MovieDetailsPage = () => {
  
   const goBack = () => {
     // return navigate(location?.state?.from);
-    return navigate(-1);
+    // return navigate(-1);
+    navigate(location?.state?.from || '/');
   }; 
 
   return (
