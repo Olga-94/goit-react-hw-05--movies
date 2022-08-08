@@ -16,12 +16,12 @@ const MovieDetailsPage = lazy(() =>
     '../Views/MovieDetailsPage' /* webpackChunkName: "movie-details-page" */
   ),
 );
-// const CastView = lazy(() =>
-//   import('../Views/CastViews' /* webpackChunkName: "cast-view" */),
-// );
-// const ReviewsView = lazy(() =>
-//   import('../Views/ReviewsView' /* webpackChunkName: "reviews-view" */),
-// );
+const CastView = lazy(() =>
+  import('../Views/CastViews' /* webpackChunkName: "cast-view" */),
+);
+const ReviewsView = lazy(() =>
+  import('../Views/ReviewsView' /* webpackChunkName: "reviews-view" */),
+);
 
 const NotFoundPage = lazy(() =>
   import('../Views/NotFoundPage' /* webpackChunkName: "not-found-page" */),
@@ -30,14 +30,18 @@ const NotFoundPage = lazy(() =>
 export const App = () =>  {
   return (
     <Container>
-      <AppBar />
+      {/* <AppBar /> */}
       <Suspense fallback={<Spinner />}>
         <Routes>
-          <Route exact path="/" element={<HomePage />} />
-          <Route exact path="/movies" element={<MoviesPage />} />
-          <Route exact path="/movies/:movieId" element={<MovieDetailsPage />} />
-          {/* <Route exact path="/cast" element={<CastView />} />
-          <Route exact path="/reviews" element={<ReviewsView />} /> */}
+          <Route path="/" element={<AppBar />}>
+            <Route index element={<HomePage />} />
+            <Route path="/movies" element={<MoviesPage />} />
+          
+            <Route path="/movies/:movieId" element={<MovieDetailsPage />}>
+              <Route path="cast" element={<CastView />} />
+              <Route path="reviews" element={<ReviewsView />} />
+            </Route>
+          </Route>
           <Route exact path="*" element={<NotFoundPage />} />       
         </Routes>
       </Suspense>

@@ -1,17 +1,17 @@
-import { useEffect, useState, lazy, Suspense } from 'react';
-import { useParams, useNavigate, useLocation, Route, Routes } from 'react-router-dom';
+import { useEffect, useState } from 'react';
+import { useParams, useNavigate, useLocation } from 'react-router-dom';
 import toast from 'react-hot-toast';
 import { fetchMovieInformation } from '../services/apiService';
 import { Button } from '../components/App.styled';
 import MovieInfo from '../components/MovieDetails/MovieDetails';
-import Spinner from '../components/Spinner/Spinner';
+// import Spinner from '../components/Spinner/Spinner';
 
-const CastView = lazy(() =>
-  import('./CastViews' /* webpackChunkName: "cast-view" */),
-);
-const ReviewsView = lazy(() =>
-  import('./ReviewsView' /* webpackChunkName: "reviews-view" */),
-);
+// const CastView = lazy(() =>
+//   import('./CastViews' /* webpackChunkName: "cast-view" */),
+// );
+// const ReviewsView = lazy(() =>
+//   import('./ReviewsView' /* webpackChunkName: "reviews-view" */),
+// );
 
 const MovieDetailsPage = () => {
   const location = useLocation();
@@ -62,12 +62,12 @@ const MovieDetailsPage = () => {
         />
       )}
 
-      <Suspense fallback={<Spinner />}>
-      <Routes>
+      {/* <Suspense fallback={<Spinner />}> */}
+      {/* <Routes>
         <Route exact path="/cast" element={<CastView />} />
         <Route exact path="/reviews" element={<ReviewsView />} />
-      </Routes>
-      </Suspense>
+      </Routes> */}
+      {/* </Suspense> */}
     </>
   );
 }

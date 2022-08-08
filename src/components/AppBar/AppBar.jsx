@@ -6,14 +6,17 @@ import { Box } from 'components/Box';
 
  const AppBar = () => {
   return (
-    <Box >
+    <>
     <Header>
       <Navigation />
     </Header>
-      <Suspense>
-        <Outlet />
-      </Suspense>
-    </Box>
+
+      <Box>
+        <Suspense>
+         <Outlet />
+        </Suspense>
+      </Box>
+    </>
   );
 }
 
