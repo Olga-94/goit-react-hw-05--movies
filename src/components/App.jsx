@@ -42,7 +42,7 @@ export const App = () =>  {
               <Route path="reviews" element={<ReviewsView />} />
             </Route>
           </Route>
-          <Route exact path="*" element={<NotFoundPage />} />       
+          <Route path="*" element={<NotFoundPage />} />       
         </Routes>
       </Suspense>
 

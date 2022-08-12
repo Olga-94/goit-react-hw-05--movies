@@ -2,7 +2,7 @@ import { useEffect, useState, Suspense } from 'react';
 // import PropTypes from 'prop-types';
 import { Outlet, useParams } from 'react-router-dom';
 import { fetchReviews } from '../../services/apiService';
-import { Container } from '../App.styled';
+// import { Container } from '../App.styled';
 import {
   ReviewsList,
   ReviewsItem,
@@ -25,7 +25,11 @@ import {
     fetchMoviesReviews();
   }, [detailsId]);
   return (
-    <Container>
+    <>
+    {/* {reviews.length ?(
+
+
+    )} */}
       <ReviewsList>
         {reviews.map(({ id, author, content }) => (
           <ReviewsItem key={id}>
@@ -37,7 +41,7 @@ import {
       <Suspense>
         <Outlet />
       </Suspense>
-    </Container>
+    </>
   );
 }
 

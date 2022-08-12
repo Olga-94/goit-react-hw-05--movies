@@ -9,7 +9,7 @@ const CastView = () => {
   const [credits, setCredits] = useState(null);
 
   useEffect(() => {
-    const getCastInformation = async movieId => {
+    async function getCastInformation() {
       try {
         const cast = await fetchCastInformation(movieId);
 
@@ -29,6 +29,28 @@ const CastView = () => {
     }
     getCastInformation();
   }, [movieId]);
+  // useEffect(() => {
+  //   async function getCastInformation() {
+      
+  //     try {
+  //       const cast = await fetchCastInformation(movieId);
+
+  //       if (!cast.length) {
+  //         throw new Error('Cast not found');
+  //       }
+
+  //       setCredits(cast);
+  //     } catch (error) {
+  //       console.log(error);
+  //       toast.error('Cast not found');
+  //     }
+  //     const cast = await fetchCastInformation(movieId);
+
+  //     setCredits(cast);
+  //     window.scrollTo({ top: 650, behavior: 'smooth' });
+  //   }
+  //   getCastInformation();
+  // }, [movieId]);
 
   return <>{credits && <Cast credits={credits} />}</>;
 }

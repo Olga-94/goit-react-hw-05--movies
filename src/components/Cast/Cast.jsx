@@ -2,13 +2,14 @@ import { useEffect, useState, Suspense } from 'react';
 import { Outlet, useParams } from 'react-router-dom';
 // import PropTypes from 'prop-types';
 import { fetchCastInformation } from '../../services/apiService';
-import { Container } from '../App.styled';
+// import { Container } from '../App.styled';
 import { CastList, CastItem, CastTitle, Image } from './Cast.styled';
 import defaultImage from '../Images/default.png';
 
 const Cast = () => {
   const [cast, setCast] = useState([]);
   const { detailsId } = useParams();
+  
   useEffect(() => {
   const fetchMoviesCast = async () => {
     try {
@@ -22,7 +23,7 @@ const Cast = () => {
 }, [detailsId]);
 
   return (
-    <Container>
+    <>
       <CastList>
         {cast.map(({ id, name, profile_path }) => (
           <CastItem key={id}>
@@ -41,7 +42,7 @@ const Cast = () => {
       <Suspense>
         <Outlet />
       </Suspense>
-    </Container>
+    </>
   );
 };
   

@@ -45,7 +45,7 @@ export default function MovieInfo({
 
 
         <Link to="cast"  state={{from: backLinkHref}}>Cast</Link>
-        <Link to="rewiews"  state={{from: backLinkHref}}>Reviews</Link> 
+        <Link to="reviews"  state={{from: backLinkHref}}>Reviews</Link> 
       </MovieInfoWrapper>
       
       <Suspense>
