@@ -11,6 +11,7 @@ import {
   MovieParams,
 } from './MovieDetails.styled';
 import defaultImage from '../Images/defaultMovie.png';
+import { Box } from 'components/Box';
 
 export default function MovieInfo({
   poster,
@@ -25,33 +26,33 @@ export default function MovieInfo({
   const backLinkHref = location.state?.from ?? '/';
 
   return (
-    <MovieInfoContainer>
-      <Image
-        src={
-          poster ? `https://image.tmdb.org/t/p/original${poster}` : defaultImage
-        }
-        alt={title}
-      />
-      <MovieInfoWrapper>
-        <MovieTitle>{`${title} (${releaseDate.substring(0, 4)})`}</MovieTitle>
-        <MovieSubTitle>Vote</MovieSubTitle>
-        <MovieParams>{vote}</MovieParams>
-        <MovieSubTitle>Popularity</MovieSubTitle>
-        <MovieParams>{popularity}</MovieParams>
-        <MovieSubTitle>Overview</MovieSubTitle>
-        <MovieParams>{overview}</MovieParams>
-        <MovieSubTitle>Genres</MovieSubTitle>
-        <MovieParams>{genres}</MovieParams>
+    <Box>
+      <MovieInfoContainer>
+        <Image
+          src={
+            poster ? `https://image.tmdb.org/t/p/original${poster}` : defaultImage
+          }
+          alt={title}
+        />
+        <MovieInfoWrapper>
+          <MovieTitle>{`${title} (${releaseDate.substring(0, 4)})`}</MovieTitle>
+          <MovieSubTitle>User score:</MovieSubTitle>
+          <MovieParams>{Math.round(vote * 10)}%</MovieParams>
+          <MovieSubTitle>Popularity</MovieSubTitle>
+          <MovieParams>{popularity}</MovieParams>
+          <MovieSubTitle>Overview</MovieSubTitle>
+          <MovieParams>{overview}</MovieParams>
+          <MovieSubTitle>Genres</MovieSubTitle>
+          <MovieParams>{genres}</MovieParams>
 
-
-        <Link to="cast"  state={{from: backLinkHref}}>Cast</Link>
-        <Link to="reviews"  state={{from: backLinkHref}}>Reviews</Link> 
-      </MovieInfoWrapper>
-      
-      <Suspense>
-        <Outlet />
-      </Suspense>
-    </MovieInfoContainer>
+          <Link to="cast"  state={{from: backLinkHref}}>Cast</Link>
+          <Link to="reviews"  state={{from: backLinkHref}}>Reviews</Link> 
+        </MovieInfoWrapper>
+      </MovieInfoContainer>
+          <Suspense>
+            <Outlet />
+          </Suspense>
+    </Box>
   );
 }
 

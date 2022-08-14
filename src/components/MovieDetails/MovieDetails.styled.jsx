@@ -2,6 +2,9 @@ import styled from 'styled-components';
 
 export const MovieInfoContainer = styled.div`
   display: flex;
+  /* flex-direction: column; */
+  /* flex-wrap: wrap; */
+  /* justify-content: center; */
   max-width: 1170px;
   padding: 12px;
   margin-left: auto;
@@ -14,12 +17,14 @@ export const MovieInfoContainer = styled.div`
 export const Image = styled.img`
   display: block;
   max-width: 320px;
-  height: auto;
+  height: 100%;
   object-fit: cover;
   margin-right: 45px;
 `;
 
-export const MovieInfoWrapper = styled.div``;
+export const MovieInfoWrapper = styled.div`
+/* display: grid; */
+`;
 
 export const MovieTitle = styled.h1`
   text-align: center;

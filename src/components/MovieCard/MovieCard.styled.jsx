@@ -7,9 +7,12 @@ export const MovieLink = styled(Link)`
 
 export const Card = styled.li`
   border-radius: 2px;
+  /* display: flex; */
   box-shadow: 0px 1px 3px 0px rgba(0, 0, 0, 0.2),
     0px 1px 1px 0px rgba(0, 0, 0, 0.14), 0px 2px 1px -1px rgba(0, 0, 0, 0.12);
-
+    /* display: grid;
+    grid-template-columns: minmax(10px, 1fr) 3fr;
+    grid-gap: 25px; */
   &:hover,
   &:focus {
     cursor: pointer;
@@ -52,4 +55,9 @@ export const MovieCardInfo = styled.p`
   font-size: 12px;
   color: #2196f3;
   margin-bottom: 10px;
+`;
+
+export const Container = styled.div`
+display: flex;
+/* flex-direction: column; */
 `;

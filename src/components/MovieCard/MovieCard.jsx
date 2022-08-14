@@ -9,13 +9,15 @@ import {
   MovieLink,
   CardInfo,
   MovieCardInfo,
+  Container,
 } from './MovieCard.styled';
 import defaultImage from '../Images/defaultMovie.png';
-
+// import { Box } from 'components/Box';
 function MovieCard({ id, poster, title, date, rating, genres }) {
   const location = useLocation();
 
   return (
+    <Container >
     <Card>
       <MovieLink
         to={{
@@ -40,6 +42,7 @@ function MovieCard({ id, poster, title, date, rating, genres }) {
         </MovieCardInfo>
       </CardInfo>
     </Card>
+    </Container>
   );
 }
 

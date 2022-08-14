@@ -1,31 +1,31 @@
-import { useEffect, useState, Suspense } from 'react';
-import { Outlet, useParams } from 'react-router-dom';
-// import PropTypes from 'prop-types';
-import { fetchCastInformation } from '../../services/apiService';
+import {  Suspense } from 'react';
+import { Outlet} from 'react-router-dom';
+import PropTypes from 'prop-types';
+// import { fetchCastInformation } from '../../services/apiService';
 // import { Container } from '../App.styled';
 import { CastList, CastItem, CastTitle, Image } from './Cast.styled';
 import defaultImage from '../Images/default.png';
 
-const Cast = () => {
-  const [cast, setCast] = useState([]);
-  const { detailsId } = useParams();
+function Cast({ credits })  {
+//   const [cast, setCast] = useState([]);
+//   const { detailsId } = useParams();
   
-  useEffect(() => {
-  const fetchMoviesCast = async () => {
-    try {
-      const response = await fetchCastInformation(detailsId);
-      setCast(response.data.cast);
-    } catch (error) {
-      setCast([]);
-    }
-  };
-  fetchMoviesCast();
-}, [detailsId]);
+//   useEffect(() => {
+//   const fetchMoviesCast = async () => {
+//     try {
+//       const response = await fetchCastInformation(detailsId);
+//       setCast(response.data.cast);
+//     } catch (error) {
+//       setCast([]);
+//     }
+//   };
+//   fetchMoviesCast();
+// }, [detailsId]);
 
   return (
     <>
       <CastList>
-        {cast.map(({ id, name, profile_path }) => (
+        {credits.map(({ id, name, profile_path }) => (
           <CastItem key={id}>
             <Image
               src={
@@ -46,14 +46,14 @@ const Cast = () => {
   );
 };
   
-// Cast.propTypes = {
-//   cast: PropTypes.arrayOf(
-//     PropTypes.shape({
-//       id: PropTypes.number,
-//       name: PropTypes.string,
-//       profile_path: PropTypes.string,
-//     }),
-//   ),
-// };
+Cast.propTypes = {
+  cast: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.number,
+      name: PropTypes.string,
+      profile_path: PropTypes.string,
+    }),
+  ),
+};
 
 export default Cast;
