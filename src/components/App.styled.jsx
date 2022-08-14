@@ -6,7 +6,6 @@ export const Container = styled.div`
   margin-right: auto;
   background-color: #f5f6f7;
   padding: 15px;
- 
 `;
 
 
