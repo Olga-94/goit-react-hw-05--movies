@@ -8,71 +8,53 @@ import styled from 'styled-components';
 import Pagination from '../components/Pagination/Pagination';
 
  const HomePage = () => {
-  const itemsPerPage = 8;
-  // const { isExact } = useRouteMatch();
-  // const location = useLocation();
-  // const navigate = useNavigate();
+  const itemsPerPage = 20;
   const [movies, setMovies] = useState([]);
-  const [currentItems, setCurrentItems] = useState([]);
   const [pageCount, setPageCount] = useState(0);
   const [itemOffset, setItemOffset] = useState(0);
 
-  // const [totalPages, setTotalPages] = useState(null);
-  // const currentPage = Number(new URLSearchParams(window.location.search).get('page')) || 1;
+  const [totalPages, setTotalPages] = useState(null);
   
     useEffect(() => {
-      // if (!isExact) {
-      //   navigate.push('/');
-      //   toast.error('Page not found', { duration: 3000 });
-      // }
-  //   async function getFetchMovies() {
-  //     try {
-  //       const data = await fetchTrandingMovies();
-  //       const { results } = data;
-
-  //       // setTotalPages(total_pages);
-  //       setMovies(results);
-  //     } catch (error) {
-  //       console.log(error);
-  //     }
-  //   }
-  //   getFetchMovies();
-  // }, []);
+  
   async function getFetchMovies() {
     try {
-      const data = await fetchTrandingMovies();
+      const data = await fetchTrandingMovies(pageCount);
       console.log('data', data);
       const {
         results,
-        // total_pages
+        total_pages
       } = data;
-      // setTotalPages(total_pages);
+      setTotalPages(total_pages);
       setMovies(results);
     } catch (error) {
       console.log(error);
     }
   }
   getFetchMovies();
-}, []);
+  window.scrollTo({ top: 240, behavior: 'smooth' });
+}, [pageCount]);
 
-  useEffect(() => {
-    const endOffset = itemOffset + itemsPerPage;
-    setCurrentItems(movies.slice(itemOffset, endOffset));
-    setPageCount(Math.ceil(movies.length / itemsPerPage));
-  }, [itemOffset, movies, itemsPerPage]);
+useEffect(() => {}, [itemOffset, movies, itemsPerPage]);
+  // useEffect(() => {
+  //   const endOffset = itemOffset + itemsPerPage;
+  //   setCurrentItems(movies.slice(itemOffset, endOffset));
+  //   setPageCount(Math.ceil(movies.length / itemsPerPage));
+  // }, [itemOffset, movies, itemsPerPage]);
 
   const handlePageClick = ({ selected }) => {
    console.log(selected);
+   setPageCount(selected + 1);
     const newOffset = (selected * itemsPerPage) % movies.length;
     setItemOffset(newOffset);
+
   };
 
   return (
     <>
      <Title>Trending Today</Title>
-      {movies && <MovieCardList movies={currentItems} />}
-      {/* <MovieCardList movies={movies} /> */}
-      <Pagination pageCount={pageCount} onClick={handlePageClick} />
+      {movies && <MovieCardList movies={movies} />}
+      <Pagination pageCount={totalPages} onClick={handlePageClick} />
     </>
   );
 }

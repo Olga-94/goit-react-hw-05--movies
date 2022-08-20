@@ -2,9 +2,6 @@ import styled from 'styled-components';
 
 export const MovieInfoContainer = styled.div`
   display: flex;
-  /* flex-direction: column; */
-  /* flex-wrap: wrap; */
-  /* justify-content: center; */
   max-width: 1170px;
   padding: 12px;
   margin-left: auto;
@@ -23,7 +20,6 @@ export const Image = styled.img`
 `;
 
 export const MovieInfoWrapper = styled.div`
-/* display: grid; */
 `;
 
 export const MovieTitle = styled.h1`
@@ -32,7 +28,6 @@ export const MovieTitle = styled.h1`
   margin-bottom: 25px;
   line-height: 1.16;
   text-transform: uppercase;
-  // text-decoration: underline;
 `;
 
 export const MovieSubTitle = styled.h2`
