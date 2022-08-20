@@ -1,6 +1,6 @@
 
 import { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 // import toast from 'react-hot-toast';
 import { fetchTrandingMovies } from '../services/apiService';
 import MovieCardList from '../components/MovieCardList/MovieCardList';
@@ -9,6 +9,7 @@ import Pagination from '../components/Pagination/Pagination';
 
  const HomePage = () => {
   // const { isExact } = useRouteMatch();
+  const location = useLocation();
   const navigate = useNavigate();
   const [movies, setMovies] = useState([]);
   const [totalPages, setTotalPages] = useState(null);
@@ -34,8 +35,8 @@ import Pagination from '../components/Pagination/Pagination';
   }, [currentPage, navigate]);
   
   const handlePageClick = ({ selected }) => {
-    navigate.push({
-      ...window.location,
+    navigate({
+      ...location,
       search: selected === 0 ? '' : `page=${selected + 1}`,
     });
   };

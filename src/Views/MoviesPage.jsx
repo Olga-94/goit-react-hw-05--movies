@@ -1,20 +1,20 @@
 import { useState, useEffect } from 'react';
 import toast from 'react-hot-toast';
-import { useSearchParams, useLocation, useNavigate } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
 import { fetchSearchMovies } from '../services/apiService';
 import { SearchBar } from '../components/SearchBar/SearchBar';
 import MovieCardList from '../components/MovieCardList/MovieCardList';
 import Pagination from '../components/Pagination/Pagination';
 
 export default function MoviesPage() {
-  const [searhParams, setSearchParams] = useSearchParams();
-  const [movies, setMovies] = useState(null);
+  // const [searhParams, setSearchParams] = useSearchParams();
+  const [movies, setMovies] = useState();
   const [totalPages, setTotalPages] = useState(null);
   const navigate = useNavigate();
   const location = useLocation();
 
-  const searchQuery = searhParams.get('query') ?? '';
-  const currentPage = Number(new URLSearchParams(location.search).get('page'));
+  const searchQuery =  new URLSearchParams(location.search).get('query') ?? '';
+  const currentPage = Number(new URLSearchParams(location.search).get('page')) || 1;
   console.log(currentPage);
 
   useEffect(() => {
@@ -38,18 +38,29 @@ export default function MoviesPage() {
         toast.error('No results found', { duration: 3000 });
       }
     }
-    if (searchQuery === '') {
-      return;
-    }
+    // if (searchQuery === '') {
+    //   return;
+    // }
     getFetchMovies();
   }, [searchQuery, currentPage]);
 
-  const handleFormSubmit = newQuery => {
-      setSearchParams({ query: `${newQuery}` });
-  }
+  const handleFormSubmit = query => {
+      // setSearchParams({ query: `${newQuery}` });
+      if (searchQuery === query) {
+        return;
+      }
+  
+      setMovies([]);
+  
+      navigate({
+        ...location,
+        search: `query=${query}&page=1`,
+      });
+    }
+
   const handlePageClick = ({ selected }) => {
-    navigate.push({
-      ...location,
+    navigate({
+      ...window.location,
       search: `query=${searchQuery}&page=${selected + 1}`,
     });
   };
