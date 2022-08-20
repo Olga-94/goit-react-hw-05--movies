@@ -4,11 +4,11 @@ import ReactPaginate from 'react-paginate';
 import { AiOutlineArrowLeft, AiOutlineArrowRight } from 'react-icons/ai';
 import { StyledPaginateContainer } from './Pagination.styled';
 
-export default function Pagination({ totalPages, onClick }) {
+export default function Pagination({ pageCount, onClick }) {
   return (
     <StyledPaginateContainer>
       <ReactPaginate
-        pageCount={totalPages}
+        pageCount={pageCount}
         onPageChange={onClick}
         marginPagesDisplayed={2}
         pageRangeDisplayed={5}

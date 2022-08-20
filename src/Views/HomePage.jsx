@@ -1,6 +1,6 @@
 
 import { useState, useEffect } from 'react';
-import { useNavigate, useLocation } from 'react-router-dom';
+// import { useNavigate, useLocation } from 'react-router-dom';
 // import toast from 'react-hot-toast';
 import { fetchTrandingMovies } from '../services/apiService';
 import MovieCardList from '../components/MovieCardList/MovieCardList';
@@ -8,45 +8,71 @@ import styled from 'styled-components';
 import Pagination from '../components/Pagination/Pagination';
 
  const HomePage = () => {
+  const itemsPerPage = 8;
   // const { isExact } = useRouteMatch();
-  const location = useLocation();
-  const navigate = useNavigate();
+  // const location = useLocation();
+  // const navigate = useNavigate();
   const [movies, setMovies] = useState([]);
-  const [totalPages, setTotalPages] = useState(null);
-  const currentPage = Number(new URLSearchParams(window.location.search).get('page')) || 1;
+  const [currentItems, setCurrentItems] = useState([]);
+  const [pageCount, setPageCount] = useState(0);
+  const [itemOffset, setItemOffset] = useState(0);
+
+  // const [totalPages, setTotalPages] = useState(null);
+  // const currentPage = Number(new URLSearchParams(window.location.search).get('page')) || 1;
   
     useEffect(() => {
       // if (!isExact) {
       //   navigate.push('/');
       //   toast.error('Page not found', { duration: 3000 });
       // }
-    async function getFetchMovies() {
-      try {
-        const data = await fetchTrandingMovies(currentPage);
-        const { results, total_pages } = data;
+  //   async function getFetchMovies() {
+  //     try {
+  //       const data = await fetchTrandingMovies();
+  //       const { results } = data;
 
-        setTotalPages(total_pages);
-        setMovies(results);
-      } catch (error) {
-        console.log(error);
-      }
+  //       // setTotalPages(total_pages);
+  //       setMovies(results);
+  //     } catch (error) {
+  //       console.log(error);
+  //     }
+  //   }
+  //   getFetchMovies();
+  // }, []);
+  async function getFetchMovies() {
+    try {
+      const data = await fetchTrandingMovies();
+      console.log('data', data);
+      const {
+        results,
+        // total_pages
+      } = data;
+      // setTotalPages(total_pages);
+      setMovies(results);
+    } catch (error) {
+      console.log(error);
     }
-    getFetchMovies();
-  }, [currentPage, navigate]);
-  
+  }
+  getFetchMovies();
+}, []);
+
+  useEffect(() => {
+    const endOffset = itemOffset + itemsPerPage;
+    setCurrentItems(movies.slice(itemOffset, endOffset));
+    setPageCount(Math.ceil(movies.length / itemsPerPage));
+  }, [itemOffset, movies, itemsPerPage]);
+
   const handlePageClick = ({ selected }) => {
-    navigate({
-      ...location,
-      search: selected === 0 ? '' : `page=${selected + 1}`,
-    });
+   console.log(selected);
+    const newOffset = (selected * itemsPerPage) % movies.length;
+    setItemOffset(newOffset);
   };
 
   return (
     <>
      <Title>Trending Today</Title>
-      {movies && <MovieCardList movies={movies} />}
+      {movies && <MovieCardList movies={currentItems} />}
       {/* <MovieCardList movies={movies} /> */}
-      <Pagination totalPages={totalPages} onClick={handlePageClick} />
+      <Pagination pageCount={pageCount} onClick={handlePageClick} />
     </>
   );
 }
