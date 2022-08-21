@@ -8,7 +8,6 @@ import Pagination from '../components/Pagination/Pagination';
 import NotFoundPage from './NotFoundPage';
 
 export default function MoviesPage() {
-  // const [searchParams, setSearchParams] = useSearchParams();
   const [movies, setMovies] = useState();
   const [totalPages, setTotalPages] = useState(null);
   const navigate = useNavigate();

@@ -1,7 +1,5 @@
 
 import { useState, useEffect } from 'react';
-// import { useNavigate, useLocation } from 'react-router-dom';
-// import toast from 'react-hot-toast';
 import { fetchTrandingMovies } from '../services/apiService';
 import MovieCardList from '../components/MovieCardList/MovieCardList';
 import styled from 'styled-components';

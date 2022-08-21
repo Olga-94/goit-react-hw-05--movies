@@ -12,7 +12,7 @@ import {
   Container,
 } from './MovieCard.styled';
 import defaultImage from '../Images/defaultMovie.png';
-// import { Box } from 'components/Box';
+
 function MovieCard({ id, poster, title, date, rating, genres }) {
   const location = useLocation();
 
@@ -20,10 +20,8 @@ function MovieCard({ id, poster, title, date, rating, genres }) {
     <Container >
     <Card>
       <MovieLink
-        to={{
-          pathname: `/movies/${id}`,
-          state: { from: location },
-        }}
+      to={`/movies/${id}`}
+      state={{ from: location }}
       >
         <Image
           src={

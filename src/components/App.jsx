@@ -30,7 +30,6 @@ const NotFoundPage = lazy(() =>
 export const App = () =>  {
   return (
     <Container>
-      {/* <AppBar /> */}
       <Suspense fallback={<Spinner />}>
         <Routes>
           <Route path="/" element={<AppBar />}>

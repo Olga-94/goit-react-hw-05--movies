@@ -1,8 +1,6 @@
 import { Suspense } from 'react';
 import PropTypes from 'prop-types';
 import { Outlet } from 'react-router-dom';
-// import { fetchReviews } from '../../services/apiService';
-// import { Container } from '../App.styled';
 import {
   ReviewsList,
   ReviewsItem,
@@ -11,25 +9,9 @@ import {
 } from './Reviews.styled';
 
   const Reviews = ({ reviews }) => {
-  //   const [reviews, setReviews] = useState([]);
-  // const { detailsId } = useParams();
-  // useEffect(() => {
-  //   const fetchMoviesReviews = async () => {
-  //     try {
-  //       const response = await fetchReviews(detailsId);
-  //       setReviews(response.data.results);
-  //     } catch (error) {
-  //       setReviews([]);
-  //     }
-  //   };
-  //   fetchMoviesReviews();
-  // }, [detailsId]);
+
   return (
     <>
-    {/* {reviews.length ?(
-
-
-    )} */}
       <ReviewsList>
         {reviews.map(({ id, author, content }) => (
           <ReviewsItem key={id}>
