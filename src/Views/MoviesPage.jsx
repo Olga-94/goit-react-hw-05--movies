@@ -5,17 +5,16 @@ import { fetchSearchMovies } from '../services/apiService';
 import { SearchBar } from '../components/SearchBar/SearchBar';
 import MovieCardList from '../components/MovieCardList/MovieCardList';
 import Pagination from '../components/Pagination/Pagination';
+import NotFoundPage from './NotFoundPage';
 
 export default function MoviesPage() {
-  // const [searhParams, setSearchParams] = useSearchParams();
+  // const [searchParams, setSearchParams] = useSearchParams();
   const [movies, setMovies] = useState();
   const [totalPages, setTotalPages] = useState(null);
   const navigate = useNavigate();
   const location = useLocation();
-
-  const searchQuery =  new URLSearchParams(location.search).get('query') ?? '';
+  const searchQuery =  new URLSearchParams(location.search).get('query');
   const currentPage = Number(new URLSearchParams(location.search).get('page')) || 1;
-  console.log(currentPage);
 
   useEffect(() => {
     if (!searchQuery) {
@@ -24,11 +23,13 @@ export default function MoviesPage() {
 
     async function getFetchMovies() {
       try {
-        const data = await fetchSearchMovies(searchQuery);
+        const data = await fetchSearchMovies(searchQuery, currentPage);
+        console.log('data', data);
         const { results, total_pages } = data;
 
         if (!results.length) {
-          throw new Error('No results found');
+          // throw new Error('No results found');
+          NotFoundPage();
         }
 
         setMovies(results);
@@ -38,14 +39,12 @@ export default function MoviesPage() {
         toast.error('No results found', { duration: 3000 });
       }
     }
-    // if (searchQuery === '') {
-    //   return;
-    // }
     getFetchMovies();
+    window.scrollTo({ top: 240, behavior: 'smooth' });
   }, [searchQuery, currentPage]);
 
   const handleFormSubmit = query => {
-      // setSearchParams({ query: `${newQuery}` });
+
       if (searchQuery === query) {
         return;
       }
@@ -60,7 +59,7 @@ export default function MoviesPage() {
 
   const handlePageClick = ({ selected }) => {
     navigate({
-      ...window.location,
+      ...location,
       search: `query=${searchQuery}&page=${selected + 1}`,
     });
   };
@@ -71,7 +70,7 @@ export default function MoviesPage() {
       {movies && (
         <>
           <MovieCardList movies={movies} />
-          <Pagination totalPages={totalPages} onClick={handlePageClick} />
+          <Pagination pageCount={totalPages} onClick={handlePageClick} />
         </>
       )}
     </>

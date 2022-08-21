@@ -36,11 +36,6 @@ import Pagination from '../components/Pagination/Pagination';
 }, [pageCount]);
 
 useEffect(() => {}, [itemOffset, movies, itemsPerPage]);
-  // useEffect(() => {
-  //   const endOffset = itemOffset + itemsPerPage;
-  //   setCurrentItems(movies.slice(itemOffset, endOffset));
-  //   setPageCount(Math.ceil(movies.length / itemsPerPage));
-  // }, [itemOffset, movies, itemsPerPage]);
 
   const handlePageClick = ({ selected }) => {
    console.log(selected);

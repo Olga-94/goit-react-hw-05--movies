@@ -8,7 +8,7 @@ import { Link, Nav } from './Navigation.styled';
         Home
       </Link>
 
-      <Link to="/movies">Movies</Link>
+      <Link to="/movies" >Movies</Link>
     </Nav>
   );
 }

@@ -11,6 +11,8 @@ const MovieDetailsPage = () => {
   const navigate = useNavigate();
   const { movieId } = useParams();
   const [movie, setMovie] = useState(null);
+  // const backUrlPath = useRef(location.state?.from ?? '/');
+  // const routerState = useRef(location.state?.from).current;
 
   useEffect(() => {
     async function getMovieInformation() {
@@ -31,9 +33,11 @@ const MovieDetailsPage = () => {
   }, [ movieId]);
  
   const goBack = () => {
-    // return navigate(location?.state?.from);
+    // return navigate(backUrlPath.current, { replace: true });
     // return navigate(-1);
-    navigate(location?.state?.from || '/');
+    return navigate(location?.state?.from || '/');
+    // navigate(backUrlPath.current, { replace: true });
+    // navigate(routerState ?? '/');
   }; 
 
   return (
